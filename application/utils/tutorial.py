@@ -7,16 +7,19 @@ from .constants import *
 
 
 def load_annotations(fname):
+    print(f"load_annotations({fname})")
     f = open(fname, 'r')
     return json.load(f)
 
 
 def get_span(ann):
+    print(f"get_span({ann})")
     s = ann['spans'][0]
     return [s['start'], s['end']]
 
 
 def clean_ann(ann):
+    print(f"clean_ann({ann})")
     text = ann['text']
     start, end = ann['spans'][0]['start'], ann['spans'][0]['end']
     if text.startswith((' ', '\n', '.', ',')):
@@ -38,6 +41,7 @@ def clean_ann(ann):
 
 
 def convert_annotations(annotations):
+    print(f"convert_annotations({annotations})")
     dict_annotations = {}
     for ann in annotations:
         is_suggestion = ann['creationType'] == 'auto' or ann['creationType'] == 'dynamic'
@@ -54,24 +58,28 @@ def span_length(span):
 
 
 def count_span_overlap(span1, span2):
+    print(f"count_span_overlap({span1}, {span2})")
     sorted_spans = [span1, span2] if span1[0] <= span2[0] else [span2, span1]
     left, right = sorted_spans[0], sorted_spans[1]
     return max(left[1] - right[0], 0)
 
 
 def count_ann_overlap(ann1, ann2):
+    print(f"count_ann_overlap({ann1}, {ann2})")
     span1 = get_span(ann1)
     span2 = get_span(ann2)
     return count_span_overlap(span1, span2)
 
 
 def is_correct_labels(gold, user):
+    print(f"is_correct_labels({gold}, {user})")
     gold_label_ids = set(map(lambda label: label["labelId"], gold["labels"]))
     user_label_ids = set(map(lambda label: label["labelId"], user["labels"]))
     return len(gold_label_ids.intersection(user_label_ids)) > 0
 
 
 def max_start(result):
+    print(f"max_start({result})")
     def get_start(ann):
         return get_span(ann)[0]
     max_start = -1
@@ -87,6 +95,7 @@ def max_start(result):
 
 
 def compare_ann(user_ann, gold_ann):
+    print(f"compare_ann({user_ann}, {gold_ann})")
     results = []
 
     gold_user_span_matches = {}
@@ -154,6 +163,7 @@ def compare_ann(user_ann, gold_ann):
 
 
 def create_user_dir(userId):
+    print(f"create_user_dir({userId})")
     user_dirpath = USERS_DIRECTORY + '/' + userId
 
     try:
@@ -167,6 +177,7 @@ def create_user_dir(userId):
 
 
 def file_evaluation(fileId, userId):
+    print(f"file_evaluation({fileId}, {userId})")
     user_filepath = USERS_DIRECTORY + '/' + userId + '/' + fileId + '.json'
     user_ann = convert_annotations(load_annotations(user_filepath))
     gold_filepath = TUTORIAL_DIRECTORY + '/' + fileId + '-gold.json'
@@ -175,6 +186,7 @@ def file_evaluation(fileId, userId):
 
 
 def clear_user_annotations(userId):
+    print(f"clear_user_annotations({userId})")
     timestamp = int(time.time())
     for i in range(1, TUTORIAL_LENGTH + 1):
         filepath = USERS_DIRECTORY + '/' + userId + '/' + str(i) + '.json'

@@ -114,7 +114,7 @@ class Selection extends React.Component<SelectionProps, SelectionState> {
           </Tooltip>
         </div>
 
-        <div className="cui-menu">
+        {/* <div className="cui-menu">
           <div
             className={`hover-state cui-menu-option ${CUIMode === CUI_NORMAL && "selected"}`}
             onClick={() => onCUIModeChange(CUI_NORMAL)}
@@ -135,7 +135,7 @@ class Selection extends React.Component<SelectionProps, SelectionState> {
           >
             No CUI Match
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }

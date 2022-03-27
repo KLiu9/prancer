@@ -46,6 +46,8 @@ import {
   DYNAMIC_SUGGESTIONS_ENABLED
 } from '../../../constants';
 
+import LABELS from "./config";
+
 function mapStateToProps(state) {
     return {};
 }
@@ -114,19 +116,22 @@ class AnnotationView extends React.Component {
   }
 
   async fetchLabels(searchTerm, searchMode, isKeyword, experimentMode) {
-    const labelPromise = searchMode === SEARCH_AUTOMATIC
-      ? this.props.recommendLabels(searchTerm, isKeyword, experimentMode)
-      : this.props.searchLabels(searchTerm);
+    // const labelPromise = searchMode === SEARCH_AUTOMATIC
+    //   ? this.props.recommendLabels(searchTerm, isKeyword, experimentMode)
+    //   : this.props.searchLabels(searchTerm);
 
-    const data = await labelPromise.then((response) => response.data);
-    const labels = data.labels.map(l => ({
-      labelId: l[0],
-      title: l[1],
-      categories: l[2].map(c => ({ title: c[0], type: c[1] })),
-    }));
+    // const data = await labelPromise.then((response) => response.data);
+    // const labels = data.labels.map(l => ({
+    //   labelId: l[0],
+    //   title: l[1],
+    //   categories: l[2].map(c => ({ title: c[0], type: c[1] })),
+    // }));
 
+    // this.setState({
+    //   searchedLabels: labels,
+    // });
     this.setState({
-      searchedLabels: labels,
+      searchedLabels: LABELS,
     });
   }
 

@@ -7,6 +7,7 @@ from .suggestions import suggest_mapped_annotations, load_csv_annotations
 
 
 def get_filenames_from_directory():
+    print(f"get_filenames_from_directory()")
     filenames = []
     for f in os.listdir(FILES_DIRECTORY):
         name, ext = os.path.splitext(f)
@@ -16,6 +17,7 @@ def get_filenames_from_directory():
 
 
 def get_file_data(id, textDir=FILES_DIRECTORY, annDir=FILES_DIRECTORY):
+    print(f"get_file_data({id}, {textDir}, {annDir})")
     filepath = textDir + '/' + id + '.txt'
     ann_filepath = annDir + '/' + id + '.json'
     csv_path =  textDir + '/' + id + '.csv'
@@ -48,6 +50,7 @@ def get_file_data(id, textDir=FILES_DIRECTORY, annDir=FILES_DIRECTORY):
 
 
 def save_annotations_file(filename, annotations, dir=FILES_DIRECTORY):
+    print(f"save_annotations_file({filename}, {annotations}, {dir})")
     filepath = dir + '/' + filename
     try:
         with open(filepath, 'w') as outfile:

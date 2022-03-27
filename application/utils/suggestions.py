@@ -10,6 +10,7 @@ from .constants import *
 suggestions = pickle.load(open(SUGGESTIONS_FILE, 'rb'))
 
 def load_csv_annotations(text, annotation_df):
+    print(f"load_csv_annotations({text}, {annotation_df})")
     annotations = []
     for i, row in annotation_df.iterrows():
         span = (int(row['start']), int(row['end']))
@@ -18,6 +19,7 @@ def load_csv_annotations(text, annotation_df):
     return annotations
 
 def suggest_mapped_annotations(text):
+    print(f"suggest_mapped_annotations({text})")
     annotations = []
     for keyword in suggestions:
         labels = suggestions[keyword]
@@ -27,6 +29,7 @@ def suggest_mapped_annotations(text):
 
 
 def keyword_annotations(text, keyword, labels, confidence):
+    print(f"keyword_annotations({text}, {keyword}, {labels}, {confidence})")
     ## Default to separate word, case insensitive
     try:
         return [create_annotation(text, match.span(), labels, confidence)
@@ -41,6 +44,7 @@ def keyword_annotations(text, keyword, labels, confidence):
 
 
 def create_annotation(text, span, labels, confidence):
+    print(f"create_annotation({text}, {span}, {labels}, {confidence})")
     timestamp = time.time()  # Didn't round to ms to preserve uniqueness
     start, end = span
     if type(labels) is str:
@@ -61,7 +65,7 @@ def create_annotation(text, span, labels, confidence):
 
 ## Only creates a suggestion for a single code
 def create_labels(codes, confidence):
-    print(codes, type(codes), confidence)
+    print(f"create_labels({codes}, {type(codes)}, {confidence}")
     if len(codes) > 0 and codes[0] in cui2index:
         print("inside here")
         data = label_data(cui2index[codes[0]])

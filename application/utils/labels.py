@@ -13,7 +13,6 @@ from nltk.corpus import stopwords
 from .constants import *
 from .umls_retrieve import retrieve_labels
 
-
 umls, lookup = pickle.load(open(LABELS_FILE, 'rb'), encoding='bytes')
 index = pickle.load(open(INDEX_FILE, 'rb'), encoding='bytes')
 types, tuis = pickle.load(open(TYPES_FILE, 'rb'), encoding='bytes')
@@ -22,10 +21,11 @@ colors = pickle.load(open(COLORS_FILE, 'rb'), encoding='bytes')
 cui2index = {term[0]: i for i, term in enumerate(umls)}
 
 stemmer = PorterStemmer()
-translator = str.maketrans(string.punctuation, ' '*len(string.punctuation))
+translator = str.maketrans(string.punctuation, ' ' * len(string.punctuation))
 
 
 def get_labels_for_code(code):
+    print(f"get_labels_for_code({code})")
     if code in cui2index:
         return [label_data(cui2index[code])]
     else:
@@ -33,6 +33,7 @@ def get_labels_for_code(code):
 
 
 def get_labels_for_codes(codes):
+    print(f"get_labels_for_codes({codes})")
     labels = []
     for code in codes:
         labels += get_labels_for_code(code)
@@ -60,6 +61,7 @@ def get_colormap_data():
 
 
 def get_umls_labels(keyword):
+    print(f"get_umls_labels({keyword})")
     api_labels = retrieve_labels(keyword)
     if len(api_labels) == 1 and api_labels[0]['ui'] == 'NONE':
         return []
@@ -68,6 +70,7 @@ def get_umls_labels(keyword):
 
 
 def get_algorithm_labels(keyword_entered):
+    print(f"get_algorithm_labels({keyword_entered})")
     keyword = keyword_entered.lower()
     ordered_lookups = get_lookups_ordered(keyword)
     ordered_indexed = get_inverted_index_ordered(keyword, index)
@@ -81,8 +84,14 @@ def get_algorithm_labels(keyword_entered):
 
 # All modes -> best recommendation system
 def get_labels_for_keyword(keyword_entered):
+    print(f"get_labels_for_keyword({keyword_entered})")
     labels = get_algorithm_labels(keyword_entered)
     return labels
+
+
+# ignores keyword part
+def get_all_labels():
+    return [label_data(label_id) for label_id in range(len(umls))]
 
 
 def get_distance(term1, term2):
@@ -92,6 +101,7 @@ def get_distance(term1, term2):
 
 
 def get_inverted_index_ordered(term, inverted_index, num=15):
+    print(f"get_inverted_index_ordered({term}, inverted_index, {num})")
     words = term.translate(translator).split()
     stemmed = []
     candidates = []
@@ -115,10 +125,11 @@ def get_inverted_index_ordered(term, inverted_index, num=15):
             synonyms = [umls[label_id][1]] + umls[label_id][4]
             score = min([get_distance(synonym, term) for synonym in synonyms])
             scores += [score]
-    return [result for _,result in sorted(zip(scores, candidates))][:num]
+    return [result for _, result in sorted(zip(scores, candidates))][:num]
 
 
 def get_lookups_ordered(keyword):
+    print(f"get_lookups_ordered({keyword})")
     if keyword not in lookup:
         return []
     label_ids = lookup[keyword]
@@ -130,4 +141,4 @@ def get_lookups_ordered(keyword):
         if keyword == umls[label_id][1]:
             score -= 100
         scores.append(score)
-    return [result for _,result in sorted(zip(scores, results))]
+    return [result for _, result in sorted(zip(scores, results))]

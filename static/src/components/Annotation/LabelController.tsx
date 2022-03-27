@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from './SearchBar'
+// import SearchBar from './SearchBar'
 import LabelListItem from './LabelListItem'
 import LabelFilter from './LabelFilter'
 import {
@@ -70,7 +70,8 @@ class LabelController extends React.Component<LabelControllerProps, LabelControl
   addLabel = (label: Label, i: number) => {
     const { selectedLabels, setSelectedLabels, searchMode } = this.props
     if (!selectedLabels.map(l => l.labelId).includes(label.labelId)) {
-      setSelectedLabels([...selectedLabels, label])
+      // setSelectedLabels([...selectedLabels, label])
+      setSelectedLabels([label]);
     }
 
     this.props.addLogEntryBound(LOG_LABEL_ADD, [label.labelId, String(i), searchMode])
@@ -127,7 +128,7 @@ class LabelController extends React.Component<LabelControllerProps, LabelControl
     return (
       <div className="label-controller">
         <div className="bordered-section divided-section" style={{ height: '100%' }}>
-          <div style={{ paddingBottom: 20, overflow: 'hidden' }}>
+          {/* <div style={{ paddingBottom: 20, overflow: 'hidden' }}>
             <div style={{ width: '100%' }}>
               <SearchBar
                 initialText={this.state.searchText}
@@ -136,7 +137,7 @@ class LabelController extends React.Component<LabelControllerProps, LabelControl
                 onEnter={(searchTerm) => this.handleEnterPress(searchTerm, true)}
               />
             </div>
-          </div>
+          </div> */}
 
           <LabelFilter
             colormap={colormap}
@@ -147,13 +148,15 @@ class LabelController extends React.Component<LabelControllerProps, LabelControl
           <h4
             className="label-controller-description"
             style={{
-              marginTop: 35,
+              marginTop: 45,
               paddingTop: 10,
               fontWeight: 'normal',
-              color: searchMode === SEARCH_AUTOMATIC ? 'red' : 'black'
+              // color: searchMode === SEARCH_AUTOMATIC ? 'red' : 'black'
+              color: 'black'
             }}
           >
-            {searchMode === SEARCH_AUTOMATIC ? "Recommended" : "Searched"} Labels:
+            {/* {searchMode === SEARCH_AUTOMATIC ? "Recommended" : "Searched"} Labels: */}
+            Labels:
           </h4>
 
           <div onWheel={this.onLabelListScroll}>
