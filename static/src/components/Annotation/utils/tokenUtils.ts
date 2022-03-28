@@ -213,6 +213,9 @@ export const createTokensWithAnnotations = (text: string, annotations: Annotatio
     // move tokenId to after annotation
     while (wordTokens[tokenId].span.end <= end) {
       tokenId += 1
+      if (tokenId == wordTokens.length) {
+        return tokens
+      }
     }
 
     // add part of word after annotation if exists
