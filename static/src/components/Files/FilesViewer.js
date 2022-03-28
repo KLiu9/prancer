@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions';
 import FileListItem from './FileListItem';
+import DragDrop from './DragDrop';
 
 function mapStateToProps(state) {
     return {
@@ -37,11 +38,13 @@ class FilesViewer extends React.Component {
     })
   }
 
+  handleRefresh = () => this.fetchData(); // handle refresh by re-fetching
+
   render() {
     return (
       <div className="files-view">
+        <DragDrop onRefresh={this.handleRefresh}/>
         <h1>Available Files</h1>
-
         <div className="files-list">
           {this.state.files.map(file => <FileListItem key={file} file={file} onClick={() => browserHistory.push(`/annotation/${file}`)} />)}
         </div>

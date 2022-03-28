@@ -26,7 +26,7 @@ STORAGE_DIRECTORY = './tutorial/attempts'  # Tutorial attempts by timestamp
 
 TUTORIAL_LENGTH = 4  # Number of steps in the tutorial (also frontend)
 
-UMLS_APIKEY = "591a7136-ae4d-4ce7-b5a9-fd8299c624c7"  # Key to make UMLS API calls
+UMLS_APIKEY = ""  # Key to make UMLS API calls
 UMLS_URI = "https://uts-ws.nlm.nih.gov"  # URI to make UMLS API calls
 
 # Options for pre-filled suggestions are "NONE", "CSV", and "MAP"

@@ -2,6 +2,7 @@ import { DEFAULT_PORT, SERVER_ADDRESS } from './constants';
 
 const http = require('http');
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const httpProxy = require('http-proxy');
 const path = require('path');
 require("babel-core/register");
@@ -38,6 +39,24 @@ app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, '/index.html'));
 });
 
+app.use(fileUpload());
+
+// upload endpoint
+app.post('/upload', (req, res) => {
+    if (req.files === null) {
+        return res.status(400).json({ msg: 'No file uploaded' });
+    }
+
+    const file = req.files.file;
+
+    file.mv(`${__dirname}/../data/${file.name}`, err => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send(err);
+        }
+        res.json({status: true, message: '${file.name} is uploaded'})
+    });
+});
 
 const server = http.createServer(app);
 server.listen(process.env.PORT || DEFAULT_PORT, () => {

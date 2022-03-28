@@ -89,7 +89,7 @@
     "q": "^1.4.1",
     "qs": "^6.1.0",
     "rc-datepicker": "^4.0.1",
-    "react": "^16.3.0",
+    "react": "^17.0.2",
     "react-addons-css-transition-group": "^15.3.1",
     "react-calendar-component": "^1.0.0",
     "react-date-picker": "^5.3.28",
@@ -126,7 +126,9 @@
   "dependencies": {
     "@material-ui/icons": "^4.5.1",
     "@types/lodash": "^4.14.144",
+    "express-fileupload": "^1.2.1",
     "json-loader": "^0.5.7",
-    "list-react-files": "^0.2.0"
+    "list-react-files": "^0.2.0",
+    "react-drag-drop-files": "^2.3.4"
   }
 }
