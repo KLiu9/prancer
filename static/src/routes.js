@@ -11,6 +11,7 @@ import { TutorialDoneContainer } from './containers/TutorialDoneContainer';
 /* components */
 import AnnotationView from './components/Annotation/AnnotationView';
 import FilesViewer from './components/Files/FilesViewer';
+import SimplificationView from './components/Simplification/SimplificationView';
 import NotFound from './components/NotFound';
 import TutorialView from './components/Tutorial/TutorialView';
 import TutorialAnnotation from './components/Tutorial/TutorialAnnotation';
@@ -27,6 +28,7 @@ export default (
         <Route path="tutorial/done" component={TutorialDoneContainer} />
         <Route path="tutorial/:userId/:fileId" component={TutorialAnnotation} />
         <Route path="tutorial/explanation/:userId/:fileId" component={TutorialExplanation} />
+        <Route path="simplification" component={SimplificationView} />
         <Route path="*" component={NotFound} />
     </Route>
 );

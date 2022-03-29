@@ -66,6 +66,9 @@ export class Header extends Component {
                         <MenuItem onClick={() => this.dispatchNewRoute('/tutorial')}>
                             Tutorial
                         </MenuItem>
+                        <MenuItem onClick={() => this.dispatchNewRoute('/simplification')}>
+                            Simplify
+                        </MenuItem>
                       </div>
                     }
                 </LeftNav>
