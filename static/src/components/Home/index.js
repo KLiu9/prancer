@@ -3,7 +3,7 @@ import React from 'react';
 export const Home = () =>
   <section>
     <div className="home container text-body">
-      <h1>Welcome to the clinical annotation platform!</h1>
+      <h1>Welcome to the Clinical Annotation Platform!</h1>
 
       <h3>Files Directory</h3>
       <p>

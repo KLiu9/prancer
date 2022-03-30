@@ -60,11 +60,11 @@ export class Header extends Component {
                         <MenuItem onClick={() => this.dispatchNewRoute('/home')}>
                             Home
                         </MenuItem>
-                        <MenuItem onClick={() => this.dispatchNewRoute('/filesView')}>
-                            Files
-                        </MenuItem>
                         <MenuItem onClick={() => this.dispatchNewRoute('/tutorial')}>
                             Tutorial
+                        </MenuItem>
+                        <MenuItem onClick={() => this.dispatchNewRoute('/filesView')}>
+                            Files
                         </MenuItem>
                         <MenuItem onClick={() => this.dispatchNewRoute('/simplification')}>
                             Simplify

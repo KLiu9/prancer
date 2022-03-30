@@ -9,7 +9,6 @@ const DragDrop = ({onRefresh}) => {
     const [uploadPercentage, setUploadPercentage] = useState(0);
 
     const handleChange = (file) => {
-        console.log('handleChange: %s', file);
         setFile(file);
         const formData = new FormData();
         formData.append('file', file);

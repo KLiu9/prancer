@@ -108,6 +108,8 @@ class AnnotationView extends React.Component {
       : getFile(fileId);
     const data = await file.then((response) => response.data);
 
+    data.file.annotations.shift();
+
     this.setState({
       fileId,
       text: data.file.text,
@@ -321,7 +323,11 @@ class AnnotationView extends React.Component {
     const { fileId, userId } = params;
 
     const dir = tutorial ? './tutorial/users/'+userId : null;
-    this.props.saveAnnotations(fileId, this.state.annotations, dir);
+
+    const myannotations = this.state.annotations.slice();
+    myannotations.unshift({ "original" : this.state.text }); // adds original text to json output
+
+    this.props.saveAnnotations(fileId, myannotations, dir);
   }
 
   deleteAnnotation = () => {

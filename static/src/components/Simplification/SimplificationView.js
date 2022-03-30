@@ -7,8 +7,7 @@ import Button from '@material-ui/core/Button';
 import DragDrop from './DragDrop';
 
 function mapStateToProps(state) {
-    return {
-    };
+    return {};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -38,19 +37,18 @@ class SimplificationView extends React.Component {
     })
   }
 
-  handleRefresh = () => this.fetchData(); // handle refresh by re-fetching
-
   render() {
     return (
       <div className="files-view">
-        <div>
+        <div style={{"marginTop": "20px"}}>
             <b>Upload a json file: </b>
-            <DragDrop onRefresh={this.handleRefresh}/>
+            <DragDrop />
+            <div style={{"marginTop": "20px"}}>
+              <Button variant="outlined">Previous</Button>
+              <Button variant="outlined">Next</Button>
+              <Button variant="outlined">Exit</Button>
+            </div>
         </div>
-        {/* <h1>Available Files</h1>
-        <div className="files-list">
-          {this.state.files.map(file => <FileListItem key={file} file={file} onClick={() => browserHistory.push(`/annotation/${file}`)} />)}
-        </div> */}
       </div>
     );
   }

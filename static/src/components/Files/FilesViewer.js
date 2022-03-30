@@ -7,8 +7,7 @@ import FileListItem from './FileListItem';
 import DragDrop from './DragDrop';
 
 function mapStateToProps(state) {
-    return {
-    };
+    return {};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -42,7 +41,7 @@ class FilesViewer extends React.Component {
 
   render() {
     return (
-      <div className="files-view">
+      <div className="files-view" style={{"marginTop": "20px"}}>
         <DragDrop onRefresh={this.handleRefresh}/>
         <h1>Available Files</h1>
         <div className="files-list">

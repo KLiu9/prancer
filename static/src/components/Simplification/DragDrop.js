@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-// import axios from 'axios';
 import { FileUploader } from "react-drag-drop-files";
 
 const fileTypes = ["JSON"];
 
 const DragDrop = () => {
     const [file, setFile] = useState('');
-    const [uploadPercentage, setUploadPercentage] = useState(0);
-
+    const [originalText, setOriginalText] = useState();
     const [text, setText] = useState();
 
     let fileReader;
@@ -16,7 +14,15 @@ const DragDrop = () => {
         let content = fileReader.result;
         var out = "";
         let obj = JSON.parse(content);
-        for (let i = 0; i < obj.length; i++) {
+        let i;
+        if ("original" in obj[0]) {
+            setOriginalText(obj[0]["original"]);
+            i = 1;
+        } else {
+            setOriginalText();
+            i = 0;
+        }
+        for ( ; i < obj.length; i++) {
             out += obj[i]["text"] + "\n";
         }
         setText(out);
@@ -34,7 +40,10 @@ const DragDrop = () => {
         <div>
             <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
             <div>
+                Annotated Text: <br/>
                 {text && <pre>{text}</pre>}
+                Original Text: <br/>
+                {originalText && <pre>{originalText}</pre>}
             </div>
         </div>
     );
