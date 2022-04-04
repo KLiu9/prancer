@@ -75,6 +75,9 @@ const common = {
         }, {
             test: /\.jpg$/,
             loader: 'file?name=[name].[ext]',
+        }, {
+            test: /\.(sass|less|css)$/,
+            loaders: ['style-loader', 'css-loader', 'less-loader'],
         }],
     },
 

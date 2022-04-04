@@ -126,6 +126,8 @@
   "dependencies": {
     "@material-ui/icons": "^4.5.1",
     "@types/lodash": "^4.14.144",
+    "ag-grid-community": "^27.1.0",
+    "ag-grid-react": "^27.1.0",
     "express-fileupload": "^1.2.1",
     "json-loader": "^0.5.7",
     "list-react-files": "^0.2.0",
