@@ -70,8 +70,8 @@ class LabelController extends React.Component<LabelControllerProps, LabelControl
   addLabel = (label: Label, i: number) => {
     const { selectedLabels, setSelectedLabels, searchMode } = this.props
     if (!selectedLabels.map(l => l.labelId).includes(label.labelId)) {
-      // setSelectedLabels([...selectedLabels, label])
-      setSelectedLabels([label]);
+      setSelectedLabels([...selectedLabels, label])
+      // setSelectedLabels([label]);
     }
 
     this.props.addLogEntryBound(LOG_LABEL_ADD, [label.labelId, String(i), searchMode])

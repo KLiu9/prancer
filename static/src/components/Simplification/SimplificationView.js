@@ -3,19 +3,16 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
 
 import DragDrop from './DragDrop';
-import { saveAnnotations } from '../../actions/files';
 import { save_annotations } from '../../utils/http_functions';
 
 const SimplificationView = () => {
   
   let fileReader;
-
   const gridRef = useRef();
-  const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
   const gridStyle = useMemo(() => ({ height: '400px', width: '100%' }), []);
+  const [objArray, setObjArray] = useState([]);
   const [rowData, setRowData] = useState([{},{},{},{},{},{},{}]);
   const [filename, setFilename] = useState('');
   const [gridData, setGridData] = useState([{}]);
@@ -56,18 +53,26 @@ const SimplificationView = () => {
     }
     objArray.forEach(obj => 
       {
-        //console.log(obj);
         if (obj.oldtext === undefined) 
           obj.oldtext = obj.text;
       });
-    setGridData(objArray);
-    setRowData(objArray);
+    let newArray = [];
+    let texts = {};
+    // removes duplicates (same text with multiple labels)
+    objArray.forEach(obj =>
+      {
+        if (!(obj.oldtext in texts)) {
+          newArray.push(obj);
+          texts[obj.oldtext] = obj.text;
+        }
+      });
+    setObjArray(objArray);
+    setGridData(newArray);
+    setRowData(newArray);
   }
 
   const handleFileChange = useCallback((file) => {
     setFilename(file.name);
-    console.log(file);
-    console.log(filename);
     fileReader = new FileReader();
     const blob = new Blob([file], { type: "application/json" });
     fileReader.onloadend = handleFileRead;
@@ -76,16 +81,15 @@ const SimplificationView = () => {
 
   const handleSaveAnnotations = () => {
     const {api, columnApi} = gridRef.current;
-    // api's will be null before grid initialised
-    if (api==null || columnApi==null) { return; }
-    //console.log(api);
+    // apis will be null before grid is initialized
+    if (api == null || columnApi == null) { return; }
     let rowData = [];
     api.forEachNode(node => rowData.push(node.data));
-    const myannotations = rowData.slice();
+    let map = {};
+    rowData.forEach(row => { map[row.oldtext] = row.text });
+    objArray.forEach(obj => { obj.text = map[obj.oldtext] }); // adds back duplicate texts
+    const myannotations = objArray.slice();
     myannotations.unshift({ "original" : originalNotes }); // adds original text to json output
-    console.log(myannotations);
-    //TODO: need to fix this
-    //saveAnnotations(filename.substring(0, filename.length - 5), myannotations, null);
     save_annotations(filename.substring(0, filename.length - 5), myannotations, null);
   }
 
