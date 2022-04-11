@@ -66,9 +66,12 @@ export class Header extends Component {
                         <MenuItem onClick={() => this.dispatchNewRoute('/filesView')}>
                             Files
                         </MenuItem>
-                        <MenuItem onClick={() => this.dispatchNewRoute('/simplification')}>
-                            Simplify
+                        <MenuItem onClick={() => this.dispatchNewRoute('/simplifiedFiles')}>
+                            Simplified Files
                         </MenuItem>
+                        {/* <MenuItem onClick={() => this.dispatchNewRoute('/simplification')}>
+                            Simplify
+                        </MenuItem> */}
                       </div>
                     }
                 </LeftNav>

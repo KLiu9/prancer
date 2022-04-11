@@ -3,8 +3,7 @@ import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions';
-import FileListItem from './FileListItem';
-import DragDrop from './DragDrop';
+import SimplifiedFileListItem from './SimplifiedFileListItem';
 
 function mapStateToProps(state) {
     return {};
@@ -15,7 +14,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-class FilesViewer extends React.Component {
+class SimplifiedFilesViewer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -29,9 +28,9 @@ class FilesViewer extends React.Component {
   }
 
   async fetchData() {
-    const filenames = this.props.getFilenames();
+    const filenames = this.props.getFilenames('simplified', '.json');
     const data = await filenames.then((response) => response.data);
-
+    console.log(data);
     this.setState({
       files: data.filenames,
     })
@@ -42,14 +41,13 @@ class FilesViewer extends React.Component {
   render() {
     return (
       <div className="files-view" style={{"marginTop": "20px"}}>
-        {/* <DragDrop onRefresh={this.handleRefresh}/> */}
-        <h1>Available Files</h1>
+        <h1>Available Simplified Files</h1>
         <div className="files-list">
-          {this.state.files.map(file => <FileListItem key={file} file={file} onClick={() => browserHistory.push(`/annotation/${file}`)} />)}
+          {this.state.files.map(file => <SimplifiedFileListItem key={file} file={file} onClick={() => browserHistory.push(`/simplification/${file},${this.state.files.join(';')}`)} />)}
         </div>
       </div>
     );
   }
 }
 
-export default FilesViewer;
+export default SimplifiedFilesViewer;

@@ -6,7 +6,7 @@ from .constants import *
 from .suggestions import suggest_mapped_annotations, load_csv_annotations
 
 
-def get_filenames_from_directory():
+def get_filenames_from_directory_old():
     print(f"get_filenames_from_directory()")
     filenames = []
     for f in os.listdir(FILES_DIRECTORY):
@@ -15,6 +15,26 @@ def get_filenames_from_directory():
             filenames.append(name)
     return sorted(filenames)
 
+def get_filenames_from_directory(fileDir=FILES_DIRECTORY, fileExt='.txt'):
+    print(f"get_filenames_from_directory({fileDir},{fileExt})")
+    filenames = []
+    for f in os.listdir(fileDir):
+        name, ext = os.path.splitext(f)
+        if fileExt in ext:
+            filenames.append(name)
+    print(filenames)
+    return sorted(filenames)
+
+def get_json_file_data(id, fileDir):
+    print(f"get_json_file({id}, {fileDir})")
+    filepath = fileDir + '/' + id + '.json'
+    try:
+        with open(filepath, 'r') as infile:
+            file_ann = infile.read()
+    except FileNotFoundError:
+        print(filepath + " not found.")
+        file_ann = ""
+    return {"annotations": file_ann}
 
 def get_file_data(id, textDir=FILES_DIRECTORY, annDir=FILES_DIRECTORY):
     print(f"get_file_data({id}, {textDir}, {annDir})")

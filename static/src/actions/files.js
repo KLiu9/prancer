@@ -44,6 +44,14 @@ export function getFileRequest() {
     };
 }
 
+export function getSimplifiedFile(id, dir) {
+    return function (dispatch) {
+        dispatch(getFileRequest());
+        const file = get_json_file(id, dir);
+        return file;
+    };    
+}
+
 export function getFile(id, textDir = null, annDir = null) {
     return function (dispatch) {
         dispatch(getFileRequest());
@@ -105,10 +113,10 @@ export function getFilenamesRequest() {
     };
 }
 
-export function getFilenames() {
+export function getFilenames(dir='data', ext='.txt') {
     return function (dispatch) {
         dispatch(getFilenamesRequest());
-        const filenames = get_filenames();
+        const filenames = get_filenames(dir, ext);
         return filenames;
         // TODO: Look at how to get error messages back
         return get_filenames()
@@ -146,7 +154,6 @@ export function saveAnnotationsSuccess(token) {
         },
     };
 }
-
 
 export function saveAnnotationsFailure(error) {
     localStorage.removeItem('token');

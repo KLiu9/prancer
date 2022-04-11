@@ -2,8 +2,12 @@
 
 import axios from 'axios';
 
-export function get_filenames() {
-  return axios.get('/api/get_filenames', {});
+export function get_filenames(dir='data', ext='.txt') {
+  return axios.post('/api/get_filenames', {dir, ext});
+}
+
+export function get_json_file(id, dir) {
+  return axios.post('/api/get_json_file', { id, dir});
 }
 
 export function get_file(id, textDir, annDir) {
