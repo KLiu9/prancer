@@ -171,8 +171,8 @@ const SimplificationView = (locJson) => {
 
   return (
     <div>
-      {/* <b>Upload a json file: </b> */}
-      {/* <DragDrop onRefresh={handleFileChange}/> */}
+      <b>Upload a json file: </b>
+      <DragDrop onRefresh={handleFileChange}/>
       <div style={{"marginTop": "20px"}}>
       <b>Simplify text: {filename}</b>
       </div>

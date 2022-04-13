@@ -42,7 +42,7 @@ class FilesViewer extends React.Component {
   render() {
     return (
       <div className="files-view" style={{"marginTop": "20px"}}>
-        {/* <DragDrop onRefresh={this.handleRefresh}/> */}
+        <DragDrop onRefresh={this.handleRefresh}/>
         <h1>Available Files</h1>
         <div className="files-list">
           {this.state.files.map(file => <FileListItem key={file} file={file} onClick={() => browserHistory.push(`/annotation/${file}`)} />)}

@@ -36,8 +36,8 @@ const SAMPLE_LABELS: Label[] = [
   },
   {
     labelId: 'C04',
-    title: 'Therapy and Rational',
-    categories: [{ title: 'Therapy and Rational', type: 'Therapy and Rational' }],
+    title: 'Therapy and Rationale',
+    categories: [{ title: 'Therapy and Rationale', type: 'Therapy and Rationale' }],
   },
   {
     labelId: 'C05',
