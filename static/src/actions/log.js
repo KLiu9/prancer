@@ -1,5 +1,4 @@
 import {
-    ADD_LOG,
     ADD_LOG_FAILURE,
     ADD_LOG_REQUEST,
     ADD_LOG_SUCCESS,

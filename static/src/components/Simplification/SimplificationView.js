@@ -7,7 +7,6 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import Button from '@material-ui/core/Button';
 import DragDrop from './DragDrop';
 import { save_annotations, get_json_file, get_filenames } from '../../utils/http_functions';
-import { TextFieldsOutlined } from '@material-ui/icons';
 
 const SimplificationView = (locJson) => {
 
@@ -116,7 +115,7 @@ const SimplificationView = (locJson) => {
       filter: true,
       resizable: true,
       wrapText: true,
-      //autoHeight: true,
+      autoHeight: true,
     };
   }, []);
 

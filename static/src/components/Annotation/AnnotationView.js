@@ -1,29 +1,24 @@
 import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
 import { withTheme } from '@material-ui/core/styles';
 import * as actionCreators from '../../actions';
 import TextController from './TextController'
 import LabelController from './LabelController';
 import Selection from './Selection';
-import PauseModal from './PauseModal';
+
 import {
   createAnnotation,
   createAnnotationFromToken,
   getSelectedText,
   getSelectionSpans,
-  generateLabelCounts,
   isAnnotationSelected,
-  nMostCommonLabels,
   selectionIsEmpty,
   propagateSuggestions
 } from './utils';
 import {
   CUI_NORMAL,
-  CUI_AMBIGUOUS,
   CUI_CODELESS,
-  EXPERIMENT_0,
   LOG_HIGHLIGHT,
   LOG_ANNOTATION_ADD,
   LOG_ANNOTATION_REMOVE,
@@ -38,8 +33,6 @@ import {
   LOG_ANNOTATION_SELECT,
   SEARCH_MANUAL,
   SEARCH_AUTOMATIC,
-  MANUAL,
-  DYNAMIC,
   MODIFIED
 } from './types';
 import {

@@ -1,7 +1,7 @@
-from flask import request, render_template, jsonify, url_for, redirect, g
+from flask import request, render_template, jsonify
 from index import app
 from .utils.files import save_annotations_file, get_json_file_data, get_file_data, get_filenames_from_directory
-from .utils.labels import get_umls_labels, get_all_labels, get_labels_for_code, get_labels_for_keyword, get_colormap_data
+from .utils.labels import get_all_labels, get_labels_for_keyword, get_colormap_data
 from .utils.umls_retrieve import retrieve_cui_info
 from .utils.tutorial import file_evaluation, clear_user_annotations, create_user_dir
 from .utils.log import add_log

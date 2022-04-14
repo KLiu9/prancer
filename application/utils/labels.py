@@ -1,9 +1,6 @@
 from collections import Counter
-import os
 import pickle
 import string
-import random
-import time
 
 ## To install
 import editdistance

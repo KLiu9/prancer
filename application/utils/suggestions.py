@@ -1,7 +1,6 @@
 import re
 import time
 import pickle
-from ast import literal_eval
 
 from .labels import cui2index, label_data
 from .constants import *
